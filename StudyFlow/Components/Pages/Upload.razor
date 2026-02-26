@@ -1,5 +1,10 @@
 @page "/upload"
 @using Microsoft.AspNetCore.Components.Forms
+@using StudyFlow.Services
+@using StudyFlow.Models
+@inject StudyFlowOrchestrator Orchestrator
+@inject NavigationManager Navigation
+@inject ILogger<Upload> _logger
 
 <PageTitle>Upload PDF - StudyFlow</PageTitle>
 
@@ -49,7 +54,14 @@
         {
             <div class="processing-indicator">
                 <div class="spinner"></div>
-                <p>Processing your PDF...</p>
+                <p>@processingMessage</p>
+                @if (processingProgress > 0)
+                {
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: @(processingProgress)%"></div>
+                    </div>
+                    <p class="progress-text">@processingProgress%</p>
+                }
             </div>
         }
 
@@ -67,6 +79,8 @@
     private bool isDragging = false;
     private bool isProcessing = false;
     private string errorMessage = string.Empty;
+    private string processingMessage = "Processing your PDF...";
+    private int processingProgress = 0;
     private const long maxFileSize = 50 * 1024 * 1024; // 50MB
 
     private async Task HandleFileSelection(InputFileChangeEventArgs e)
@@ -101,23 +115,30 @@
 
         isProcessing = true;
         errorMessage = string.Empty;
+        processingProgress = 0;
 
         try
         {
-            // TODO: Implement PDF processing logic
-            // 1. Upload file to server/storage
-            // 2. Extract content using AI
-            // 3. Enrich with web data
-            // 4. Create study system
+            var progress = new Progress<ProcessingProgress>(p =>
+            {
+                processingMessage = p.Message;
+                processingProgress = p.PercentComplete;
+                InvokeAsync(StateHasChanged);
+            });
 
-            await Task.Delay(2000); // Simulated processing
+            var (document, studyContent) = await Orchestrator.ProcessDocumentAsync(selectedFile, progress);
 
-            // TODO: Navigate to study system page after processing
-            // NavigationManager.NavigateTo($"/study/{studyId}");
+            Navigation.NavigateTo($"/study/{document.Id}");
+        }
+        catch (NotImplementedException ex)
+        {
+            errorMessage = $"Feature not yet implemented: {ex.Message}";
+            _logger.LogWarning(ex, "Feature not implemented");
         }
         catch (Exception ex)
         {
             errorMessage = $"Error processing PDF: {ex.Message}";
+            _logger.LogError(ex, "Failed to process PDF");
         }
         finally
         {
@@ -297,6 +318,27 @@
     .processing-indicator p {
         color: #6366f1;
         font-weight: 500;
+    }
+
+    .progress-bar-container {
+        width: 100%;
+        height: 8px;
+        background: #e0e7ff;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 1rem 0;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+        transition: width 0.3s ease;
+    }
+
+    .progress-text {
+        font-size: 0.875rem;
+        color: #6366f1;
+        font-weight: 600;
     }
 
     .error-message {
