@@ -1,7 +1,123 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
+<PageTitle>StudyFlow - AI-Powered Learning</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="hero-section">
+    <h1 class="display-3 fw-bold mb-4">
+        <span class="gradient-text">StudyFlow</span>
+    </h1>
+    <p class="lead mb-5">Transform Your PDFs into Intelligent Study Systems</p>
+</div>
 
-Welcome to your new app.
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>Upload Your PDF</h3>
+        <p>Simply drop your study materials, research papers, or textbooks in PDF format.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Understanding</h3>
+        <p>Advanced AI extracts and comprehends the content, identifying key concepts and relationships.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Web-Enhanced Knowledge</h3>
+        <p>Enriches your materials with the latest information from trusted web sources.</p>
+    </div>
+
+    <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Adaptive Study System</h3>
+        <p>Creates a personalized, research-based learning experience that adapts to your progress.</p>
+    </div>
+</div>
+
+<div class="cta-section">
+    <h2 class="mb-3">Ready to revolutionize your learning?</h2>
+    <p class="text-muted">Start transforming your PDFs into powerful study tools today.</p>
+</div>
+
+<style>
+    .hero-section {
+        text-align: center;
+        padding: 4rem 1rem 3rem;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+        border-radius: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .feature-card {
+        padding: 2rem;
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        color: #4f46e5;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .feature-card p {
+        color: #6b7280;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .cta-section {
+        text-align: center;
+        padding: 3rem 1rem;
+        background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        border-radius: 1rem;
+        color: white;
+    }
+
+    .cta-section h2 {
+        color: white;
+    }
+
+    @@media (prefers-color-scheme: dark) {
+        .feature-card {
+            background: #1f2937;
+        }
+
+        .feature-card h3 {
+            color: #818cf8;
+        }
+
+        .feature-card p {
+            color: #9ca3af;
+        }
+    }
+</style>
