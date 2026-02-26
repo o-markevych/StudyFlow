@@ -37,7 +37,8 @@
 
 <div class="cta-section">
     <h2 class="mb-3">Ready to revolutionize your learning?</h2>
-    <p class="text-muted">Start transforming your PDFs into powerful study tools today.</p>
+    <p class="text-muted mb-4">Start transforming your PDFs into powerful study tools today.</p>
+    <a href="/upload" class="btn-start">Get Started</a>
 </div>
 
 <style>
@@ -105,6 +106,29 @@
 
     .cta-section h2 {
         color: white;
+    }
+
+    .cta-section .text-muted {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .btn-start {
+        display: inline-block;
+        padding: 1rem 3rem;
+        background: white;
+        color: #6366f1;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.125rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-start:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        color: #4f46e5;
     }
 
     @@media (prefers-color-scheme: dark) {
